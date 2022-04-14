@@ -1,5 +1,5 @@
 <?php 
-
+    get_header();
     // Iterating through posts
     while(have_posts()) {
         the_post(); ?>
@@ -10,4 +10,6 @@
         <?php the_content(); ?>
         <hr>
     <?php }
+
+    get_footer();
 ?>
