@@ -28,14 +28,42 @@
             <?php }
         ?>
         
+    <!-- Sidebar Menu -->
+    <?php 
+    // gets all the child pages of the current parent page if it has any
+    // if it does not then it wil return NULL
+    $testArray = get_pages(array(
+        'child_of' => get_the_ID()
+    ));
 
-      <!-- <div class="page-links">
-        <h2 class="page-links__title"><a href="#">About Us</a></h2>
+    // if the page is parent page or has a parent page
+    // then this statement will return true and add the sidebar menu
+    if ($theParent or $testArray) { ?>
+      <div class="page-links">
+        <h2 class="page-links__title"><a href="<?php echo get_permalink();?>"><?php echo get_the_title($theParent);?></a></h2>
         <ul class="min-list">
-          <li class="current_page_item"><a href="#">Our History</a></li>
-          <li><a href="#">Our Goals</a></li>
+          <?php 
+          //if the page is a child page, then display the menu
+          if ($theParent) {
+            $findChildrenOf = $theParent;
+          }
+          else {
+              $findChildrenOf = get_the_ID();
+          }
+
+          //list all children page in a parent page
+            wp_list_pages(array(
+                //remove the title
+                'title_li' => NULL,
+                //only grabs the children pages by using their IDs
+                'child_of' => $findChildrenOf,
+                //custom sorting of menu items
+                'sort_column' => 'menu_order'
+            ));
+          ?>
         </ul>
-      </div> -->
+      </div>
+    <?php } ?>
 
       <div class="generic-content">
         <?php the_content(); ?>
