@@ -5,9 +5,29 @@
   <div class="page-banner">
       <div class="page-banner__bg-image" style="background-image: url(<?php echo get_theme_file_uri('./images/ocean.jpg')?>)"></div>
       <div class="page-banner__content container container--narrow">
-        <h1 class="page-banner__title">Welcome to our blog!</h1>
+        <h1 class="page-banner__title">
+            <?php 
+                // checks if the user clicked on a category
+                // if (is_category()) {
+                //     single_cat_title();
+                // }
+                // checks if the user clicked on an author 
+                // if (is_author()) {
+                //     echo "Posts by ";
+                //     the_author();
+                // }
+                //checks if the user 
+                //catch all statement for archives
+                    the_archive_title();
+            ?>
+        </h1>
         <div class="page-banner__intro">
-          <p>Keep up with our latest news!</p>
+          <p>
+              <?php
+                //add the subheading 
+                the_archive_description();
+              ?>
+          </p>
         </div>
       </div>
   </div>
