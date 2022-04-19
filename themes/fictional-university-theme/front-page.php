@@ -15,6 +15,7 @@
   <div class="full-width-split__inner">
     <h2 class="headline headline--small-plus t-center">Upcoming Events</h2>
     <?php 
+      //query for current and future events
       $today = date('Ymd');
       $homepageEvents = new WP_Query(array(
         'posts_per_page' => 2,

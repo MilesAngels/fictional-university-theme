@@ -6,11 +6,11 @@
       <div class="page-banner__bg-image" style="background-image: url(<?php echo get_theme_file_uri('./images/ocean.jpg')?>)"></div>
       <div class="page-banner__content container container--narrow">
         <h1 class="page-banner__title">
-            All Events
+            Past Events
         </h1>
         <div class="page-banner__intro">
           <p>
-              See what is going on in our world.
+              A recap of our past events.
           </p>
         </div>
       </div>
@@ -18,8 +18,28 @@
   <!-- Blog Post -->
   <div class="container container--narrow page-section">
     <?php 
-      while(have_posts()) {
-        the_post();?>
+      $today = date('Ymd');
+      $pastEvents = new WP_Query(array(
+        //diaplay past events dynamically using pagination
+        'paged' => get_query_var('paged', 1),
+        'post_type' => 'event',
+        //order by custom field of event date
+        'meta_key' => 'event_date',
+        'orderby' => 'meta_value_num',
+        //filter: only return events that are in the past
+        'meta_query' => array(
+            array(
+              'key' => 'event_date',
+              'compare' => '<',
+              'value' => $today,
+              'type' => 'numeric'
+            )
+        ),
+        'order' => 'ASC'
+      ));
+
+      while($pastEvents -> have_posts()) {
+        $pastEvents -> the_post();?>
         <!-- Posts -->
         <div class="event-summary">
             <a class="event-summary__date t-center" href="<?php the_permalink() ?>">
@@ -35,10 +55,11 @@
           </div>
         </div>
       <?php }
-      echo paginate_links();
+      //to make this pagination to work, we need to give it an argument which is our custom query
+      echo paginate_links(array(
+        'total' => $pastEvents -> max_num_pages
+      ));
     ?>
-    <hr class="section-break">
-    <p>Looking for a recap of past events? <a href="<?php echo site_url('/past-events')?>">Check out our past event archive</a></p>
   </div>
 
 <?php get_footer();
