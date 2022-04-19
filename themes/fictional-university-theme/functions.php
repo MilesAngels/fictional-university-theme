@@ -21,20 +21,4 @@
 
     add_action('after_setup_theme', 'university_features');
 
-
-    function university_post_types() {
-        //used to create a new post type
-        register_post_type('event', array(
-            //this outputs the events post type in the WP dashboard
-            'public' => true,
-            //this changes the label of the post type from 'Posts' to 'Events'
-            'labels' => array(
-                'name' => 'Events'
-            ),
-            //changing the icon in the WP dashboard
-            'menu_icon' => 'dashicons-buddicons-groups'
-        ));
-    }
-
-    add_action('init', 'university_post_types');
 ?>
