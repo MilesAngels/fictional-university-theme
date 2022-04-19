@@ -21,4 +21,26 @@
 
     add_action('after_setup_theme', 'university_features');
 
+    function university_adjust_queries($query) {
+        //this will only work when you are not in the admin
+        //this will only work when the post type is event
+        // it will also not interfere with other queries
+        if(!is_admin() AND is_post_type_archive('event') AND $query->is_main_query()){
+            $today = date('Ymd');
+            $query -> set('meta-key', 'event_date');
+            $query -> set('orderby', 'meta_value_num');
+            $query -> set('order', 'ASC');
+            $query -> set('meta_query', array(
+                array(
+                  'key' => 'event_date',
+                  'compare' => '>=',
+                  'value' => $today,
+                  'type' => 'numeric'
+                )
+            ));
+        }
+    }
+
+    //right before we get the post query
+    add_action('pre_get_posts', 'university_adjust_queries');
 ?>
