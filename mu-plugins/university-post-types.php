@@ -4,10 +4,9 @@
         //used to create a new post type
         register_post_type('event', array(
             //this will give us the option of creating an excerpt for the events
-            'supports' => array('title', 'editor', 'excerpt'),
+            'supports' => array('title', 'editor', 'excerpt', 'custom-fields'),
             //this will rewrite the slug or url to be events
             'rewrite' => array('slug' => 'events'),
-             
             'has_archive' => true,
             //this outputs the events post type in the WP dashboard
             'public' => true,
@@ -15,7 +14,7 @@
             //this changes the label of the post type from 'Posts' to 'Events'
             'labels' => array(
                 'name' => 'Events',
-                'add_new_item' => 'Add New Event',
+                'add_new' => 'Add New Event',
                 'edit_item' => 'Edit Event',
                 'all_items' => 'All Events',
                 'singular_name' => 'Event'
