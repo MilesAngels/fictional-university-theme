@@ -27,6 +27,9 @@
         //fourth argument is whether you want to crop the image
         add_image_size('professorLandscape', 400, 260, true);
         add_image_size('professorPortrait', 480, 650, true);
+
+        /* Adding Width of Image Banner */
+        add_image_size('pageBanner', 1500, 350, true);
     }
 
     add_action('after_setup_theme', 'university_features');
