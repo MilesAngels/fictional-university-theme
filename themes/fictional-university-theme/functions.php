@@ -25,6 +25,15 @@
         //this will only work when you are not in the admin
         //this will only work when the post type is event
         // it will also not interfere with other queries
+        if (!is_admin() AND is_post_type_archive('program') AND $query->is_main_query()){
+            //filters
+            $query->set('orderby', 'title');
+            $query->set('order', 'ASC');
+            $query->set('posts_per_page', -1);
+        }
+        //this will only work when you are not in the admin
+        //this will only work when the post type is event
+        // it will also not interfere with other queries
         if(!is_admin() AND is_post_type_archive('event') AND $query->is_main_query()){
             $today = date('Ymd');
             $query -> set('meta-key', 'event_date');
