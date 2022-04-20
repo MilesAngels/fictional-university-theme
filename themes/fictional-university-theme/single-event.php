@@ -27,6 +27,27 @@
                     the_content();
                 ?>
             </div>
+            <!-- Output Possible Related Programs to Events -->
+            <?php 
+            
+                $relatedPrograms = get_field('related_programs');
+
+                if($relatedPrograms) {
+                    //the field returns an array
+                    //print_r($relatedPrograms);
+                    echo '<hr class="section-break">';
+                    echo '<h2 class="headline headline--medium">Related Program(s)</h2>';
+                    echo '<ul class="link-list min-list">';
+                    //use a foreach loop to iterate through the array and output
+                    //info that we deem necessary
+                    foreach($relatedPrograms as $program) {
+                        ?>
+                        <li><a href="<?php echo get_the_permalink($program)?>"><?php echo get_the_title($program);?></a></li>
+                        <?php
+                    }
+                    echo '</ul>';
+                }
+            ?>
         </div>
     <?php }
 
