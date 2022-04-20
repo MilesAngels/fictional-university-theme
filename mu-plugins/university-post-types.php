@@ -38,13 +38,33 @@
             //this changes the label of the post type from 'Posts' to 'Events'
             'labels' => array(
                 'name' => 'Programs',
-                'add_new' => 'Add New program',
+                'add_new' => 'Add New Program',
                 'edit_item' => 'Edit Programs',
                 'all_items' => 'All Programs',
                 'singular_name' => 'Program'
             ),
             //changing the icon in the WP dashboard
             'menu_icon' => 'dashicons-clipboard'
+            
+        ));
+
+        //Professor post type
+        register_post_type('professor', array(
+            //we need the thumbnail parameter so we can add a thumbnail for each professor
+            'supports' => array('title', 'editor', 'thumbnail'),
+            //this outputs the events post type in the WP dashboard
+            'public' => true,
+            'show_in_rest' => true,
+            //this changes the label of the post type from 'Posts' to 'Events'
+            'labels' => array(
+                'name' => 'Professors',
+                'add_new' => 'Add New Professor',
+                'edit_item' => 'Edit Professors',
+                'all_items' => 'All Professors',
+                'singular_name' => 'Professor'
+            ),
+            //changing the icon in the WP dashboard
+            'menu_icon' => 'dashicons-id'
             
         ));
     }
