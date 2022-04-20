@@ -17,7 +17,16 @@
         //register_nav_menu('footerLocationOne', "Footer Location One");
         //register_nav_menu('footerLocationTwo', "Footer Location Two");
         add_theme_support('title-tag');
+
+        //adding thumbnails for professors
         add_theme_support('post-thumbnails');
+
+        /* adding specific sizes to images */
+        //first argument is the name you want to give the image
+        //second argument is width and third is height
+        //fourth argument is whether you want to crop the image
+        add_image_size('professorLandscape', 400, 260, true);
+        add_image_size('professorPortrait', 480, 650, true);
     }
 
     add_action('after_setup_theme', 'university_features');

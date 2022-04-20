@@ -18,9 +18,16 @@
         <div class="container container--narrow page-section">
             
             <div class="generic-content">
-                <?php 
-                    the_content();
-                ?>
+                <div class="row group">
+                    <div class="one-third">
+                        <!-- images/thumbnail -->
+                        <?php the_post_thumbnail('professorPortrait'); ?>
+                    </div>
+                    <div class="two-thirds">
+                        <!-- content -->
+                        <?php the_content(); ?>
+                    </div>
+                </div>
             </div>
             <!-- Output Possible Related Programs to Events -->
             <?php 
