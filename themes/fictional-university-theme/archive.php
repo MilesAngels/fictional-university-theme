@@ -1,36 +1,12 @@
 <?php 
   
-  get_header();?>
-  <!-- Banner -->
-  <div class="page-banner">
-      <div class="page-banner__bg-image" style="background-image: url(<?php echo get_theme_file_uri('./images/ocean.jpg')?>)"></div>
-      <div class="page-banner__content container container--narrow">
-        <h1 class="page-banner__title">
-            <?php 
-                // checks if the user clicked on a category
-                // if (is_category()) {
-                //     single_cat_title();
-                // }
-                // checks if the user clicked on an author 
-                // if (is_author()) {
-                //     echo "Posts by ";
-                //     the_author();
-                // }
-                //checks if the user 
-                //catch all statement for archives
-                    the_archive_title();
-            ?>
-        </h1>
-        <div class="page-banner__intro">
-          <p>
-              <?php
-                //add the subheading 
-                the_archive_description();
-              ?>
-          </p>
-        </div>
-      </div>
-  </div>
+  get_header();
+  //banner
+  pageBanner(array(
+    'title' => get_the_archive_title(),
+    'subtitle' => get_the_archive_description()
+  ));
+  ?>
   <!-- Blog Post -->
   <div class="container container--narrow page-section">
     <?php 

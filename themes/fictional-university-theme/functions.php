@@ -1,4 +1,5 @@
 <?php 
+    //function for banner
     function pageBanner($args = NULL) {//$args = NULL will make the arguments optional
         //php logic will live here
         if(!$args['title']) {
@@ -8,6 +9,7 @@
             $args['subtitle'] = get_field('page_banner_title');
         }
         if(!$args['photo']) {
+            //makes sure that this code will work for archive files as well
             if(get_field('page_banner_background_image')  AND !is_archive() AND !is_home()){
                 $args['photo'] = get_field('page_banner_background_image')['sizes']['pageBanner'];
             }
