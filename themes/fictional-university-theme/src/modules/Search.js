@@ -3,12 +3,17 @@ import $ from 'jquery';
 class Search {
     /* 1. describe and create or initiate our object */
     constructor() {
+        this.resultsDiv = $("#search-overlay__results");
         //select the magnifying glass icon
         this.openButton = $(".js-search-trigger");
         this.closeButton = $(".search-overlay__close");
         this.searchOverlay = $(".search-overlay");
+        this.searchField = $("#search-term");
         this.events();
         this.isOverlayOpen = false;
+        this.isSpinnerVisible = false;
+        this.previousValue;
+        this.typingTimer;
     }
 
 
@@ -26,7 +31,11 @@ class Search {
         //when user presses down either the 's' key or the 'esc' key,
         //we need to call the function keyPressDispatcher to open or
         //close the search overlay
-        $(document).on("keydown", this.keyPressDispatcher.bind(this))
+        $(document).on("keydown", this.keyPressDispatcher.bind(this));
+
+        //when user stops typing, the function typingLogic is called
+        //it waits for 2 seconds
+        this.searchField.on("keyup", this.typingLogic.bind(this));
 
     }
 
@@ -59,6 +68,8 @@ class Search {
         $("body").addClass("body-no-scroll");
 
         this.isOverlayOpen = true;
+
+        this.typingTimer;
     }
 
     //close the search window
@@ -71,6 +82,34 @@ class Search {
 
         this.isOverlayOpen = false;
     }
+
+    //function that waits for user to stop typing before displaying results
+    typingLogic() {
+        //alert('hello form the typing logic')
+        
+        if(this.searchField.val() != this.previousValue) {
+            //clears the timer each time the user types a letter
+            clearTimeout(this.typingTimer);
+
+            if(!this.isSpinnerVisible) {
+                this.resultsDiv.html('<div class="spinner-loader"></div>');
+                this.isSpinnerVisible = true;
+            }
+
+            //timeout timer that will get executed when 2 seconds have passed
+            //after the user have stopped typing
+            this.typingTimer = setTimeout(this.getResults.bind(this), 2000);
+        }
+        
+
+        this.previousValue = this.searchField.val();
+    }
+
+    getResults() {
+        this.resultsDiv.html("imagine real result here");
+        this.isSpinnerVisible = false;
+    }
+    
 }
 
 //export this js file to index.js

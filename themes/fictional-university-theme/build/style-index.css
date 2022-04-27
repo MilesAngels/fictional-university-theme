@@ -221,7 +221,7 @@ li {
   width: 24px;
   height: 24px;
   border: 0.25rem solid rgba(0, 0, 0, 0.2);
-  border-top-color: black;
+  border-top-color: #F95738;
   -webkit-animation: spin 1s infinite linear;
   animation: spin 1s infinite linear;
 }

@@ -76,7 +76,8 @@
   width: 24px;
   height: 24px;
   border: 0.25rem solid rgba(0, 0, 0, 0.2);
-  border-top-color: black;
+  //border-image: radial-gradient(100deg, #ba2d0b 0%, #fe7f2d 37%, #ffbf46 100%);
+  border-top-color: $darkOrange;
   -webkit-animation: spin 1s infinite linear;
   animation: spin 1s infinite linear;
 }
