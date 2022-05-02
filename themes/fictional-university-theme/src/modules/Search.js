@@ -116,15 +116,16 @@ class Search {
     //function that gets the result of the search
     getResults() {
         //1st paremeter is the url and the 2nd parameter is a function
-        $.getJSON('https://fictionaluniversity.local/wp-json/wp/v2/posts?search=' + this.searchField.val(), posts => {
+        $.getJSON(universityData.root_url + '/wp-json/wp/v2/posts?search=' + this.searchField.val(), posts => {
             //access the data of the json file and display it
-            
+            //this also displays all the result of the query
             this.resultsDiv.html(`
             <h2 class="search-overlay__section-title">General Information</h2>
-            <ul class="link-list min-list">
+            ${posts.length ? '<ul class="link-list min-list">' : '<p>No general inormation matched that search.</p>'}
                 ${posts.map(item => `<li><a href="${item.link}">${item.title.rendered}</a></li>`).join('')}
-            </ul>
+            ${posts.length ? '</ul>' : ''}
             `);
+            this.isSpinnerVisible = false;
         });
 
     }
