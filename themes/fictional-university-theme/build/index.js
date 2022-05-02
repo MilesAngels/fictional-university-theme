@@ -3989,6 +3989,7 @@ __webpack_require__.r(__webpack_exports__);
 class Search {
   /* 1. describe and create or initiate our object */
   constructor() {
+    this.addSearchHTML();
     this.resultsDiv = jquery__WEBPACK_IMPORTED_MODULE_0___default()("#search-overlay__results"); //select the magnifying glass icon
 
     this.openButton = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".js-search-trigger");
@@ -4042,9 +4043,13 @@ class Search {
     //add class tro open the overlay
     this.searchOverlay.addClass("search-overlay--active"); //prevents the window from scrolling
 
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()("body").addClass("body-no-scroll");
-    this.isOverlayOpen = true;
-    this.typingTimer;
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()("body").addClass("body-no-scroll"); //
+
+    this.searchField.val(''); //puts the cursor on the search box
+
+    setTimeout(() => this.searchField.focus(), 301);
+    console.log('it works');
+    this.isOverlayOpen = true; //this.typingTimer;
   } //close the search window
 
 
@@ -4071,7 +4076,7 @@ class Search {
         //after the user have stopped typing
 
 
-        this.typingTimer = setTimeout(this.getResults.bind(this), 2000);
+        this.typingTimer = setTimeout(this.getResults.bind(this), 750);
       } else {
         this.resultsDiv.html('');
         this.isSpinnerVisible = false;
@@ -4095,6 +4100,23 @@ class Search {
             `);
       this.isSpinnerVisible = false;
     });
+  }
+
+  addSearchHTML() {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()("body").append(`
+        <div class="search-overlay">
+            <div class="search-overlay__top">
+                <div class="container">
+                    <i class="fa fa-search search-overlay__icon" aria-hidden="true"></i>
+                    <input type="text" class="search-term" placeholder="What are you looking for?" id="search-term" autocomplete="off">
+                    <i class="fa fa-window-close search-overlay__close" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div class="container">
+                <div id="search-overlay__results"></div>
+            </div>
+        </div>
+        `);
   }
 
 } //export this js file to index.js

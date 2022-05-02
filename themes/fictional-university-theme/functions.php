@@ -106,3 +106,4 @@
     //right before we get the post query
     add_action('pre_get_posts', 'university_adjust_queries');
 ?>
+ 
