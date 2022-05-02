@@ -4079,11 +4079,20 @@ class Search {
     }
 
     this.previousValue = this.searchField.val();
-  }
+  } //function that gets the result of the search
+
 
   getResults() {
-    this.resultsDiv.html("imagine real result here");
-    this.isSpinnerVisible = false;
+    //1st paremeter is the url and the 2nd parameter is a function
+    jquery__WEBPACK_IMPORTED_MODULE_0___default().getJSON('https://fictionaluniversity.local/wp-json/wp/v2/posts?search=' + this.searchField.val(), posts => {
+      //access the data of the json file and display it
+      this.resultsDiv.html(`
+            <h2 class="search-overlay__section-title">General Information</h2>
+            <ul class="link-list min-list">
+                ${posts.map(item => `<li><a href="${item.link}">${item.title.rendered}</a></li>`).join('')}
+            </ul>
+            `);
+    });
   }
 
 } //export this js file to index.js
