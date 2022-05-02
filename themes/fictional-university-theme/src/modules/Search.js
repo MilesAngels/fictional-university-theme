@@ -48,7 +48,7 @@ class Search {
         
         //if the 's' key is pressed AND if the variable isOverlayOpen = false
         //then the search overlay will be displayed
-        if (e.keyCode == 83 && !this.isOverlayOpen) {
+        if (e.keyCode == 83 && !this.isOverlayOpen && !$("input, textarea").is(':focus')) {
             this.openOverlay();    
         }
 
@@ -91,14 +91,22 @@ class Search {
             //clears the timer each time the user types a letter
             clearTimeout(this.typingTimer);
 
-            if(!this.isSpinnerVisible) {
-                this.resultsDiv.html('<div class="spinner-loader"></div>');
-                this.isSpinnerVisible = true;
+            if(this.searchField.val()) {
+                if(!this.isSpinnerVisible) {
+                    this.resultsDiv.html('<div class="spinner-loader"></div>');
+                    this.isSpinnerVisible = true;
+                }
+    
+                //timeout timer that will get executed when 2 seconds have passed
+                //after the user have stopped typing
+                this.typingTimer = setTimeout(this.getResults.bind(this), 2000);
+            }
+            else {
+                this.resultsDiv.html('');
+                this.isSpinnerVisible = false;
             }
 
-            //timeout timer that will get executed when 2 seconds have passed
-            //after the user have stopped typing
-            this.typingTimer = setTimeout(this.getResults.bind(this), 2000);
+            
         }
         
 

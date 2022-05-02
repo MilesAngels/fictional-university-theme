@@ -4026,7 +4026,7 @@ class Search {
     //console.log(e.keyCode);
     //if the 's' key is pressed AND if the variable isOverlayOpen = false
     //then the search overlay will be displayed
-    if (e.keyCode == 83 && !this.isOverlayOpen) {
+    if (e.keyCode == 83 && !this.isOverlayOpen && !jquery__WEBPACK_IMPORTED_MODULE_0___default()("input, textarea").is(':focus')) {
       this.openOverlay();
     } //if the 'esc' key is pressed AND if the variable isOverlayOpen = true
     //then the search overlay will be closed
@@ -4063,14 +4063,19 @@ class Search {
       //clears the timer each time the user types a letter
       clearTimeout(this.typingTimer);
 
-      if (!this.isSpinnerVisible) {
-        this.resultsDiv.html('<div class="spinner-loader"></div>');
-        this.isSpinnerVisible = true;
-      } //timeout timer that will get executed when 2 seconds have passed
-      //after the user have stopped typing
+      if (this.searchField.val()) {
+        if (!this.isSpinnerVisible) {
+          this.resultsDiv.html('<div class="spinner-loader"></div>');
+          this.isSpinnerVisible = true;
+        } //timeout timer that will get executed when 2 seconds have passed
+        //after the user have stopped typing
 
 
-      this.typingTimer = setTimeout(this.getResults.bind(this), 2000);
+        this.typingTimer = setTimeout(this.getResults.bind(this), 2000);
+      } else {
+        this.resultsDiv.html('');
+        this.isSpinnerVisible = false;
+      }
     }
 
     this.previousValue = this.searchField.val();

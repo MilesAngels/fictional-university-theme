@@ -989,7 +989,7 @@ body.login {
 
 .main-navigation .current-menu-item a,
 .main-navigation a:hover {
-  color: #FAF0CA;
+  color: red;
 }
 
 .page-banner {
